@@ -40,14 +40,22 @@ class Region(models.Model):
         verbose_name_plural = 'Regions'
 
 
+def photo_upload_path(instance, filename):
+    current_dt = timezone.now()
+    return f"uploads/{current_dt.strftime('%Y_%m')}/{uuid.uuid4().hex}/{filename}"
+
+
 class Article(models.Model):
+    is_active = models.BooleanField(default=False)
     title = models.CharField(max_length=512, unique=True)
     anons = models.TextField()
     text = models.TextField()
     category = models.ForeignKey(to=Category, on_delete=models.CASCADE)
-    region = models.ForeignKey(to=Region, on_delete=models.CASCADE, null=True, blank=True)
+    region = models.ManyToManyField(to=Region, related_name='article', blank=True, null=True)
     published_at = models.DateTimeField(null=True, blank=True)
-    slug = models.SlugField(unique=True)
+    review = models.PositiveIntegerField(default=0)
+    slug = models.SlugField(unique=True, max_length=256)
+    image = models.ImageField(upload_to=photo_upload_path)
 
     def __str__(self):
         return f'{self.title}'
@@ -58,11 +66,6 @@ class Article(models.Model):
         verbose_name_plural = 'Articles'
 
 
-def photo_upload_path(instance, filename):
-    current_dt = timezone.now()
-    return f"uploads/{current_dt.strftime('%Y_%m')}/{uuid.uuid4().hex} / {filename}"
-
-
 class Attachment(models.Model):
     article = models.ForeignKey(to=Article, on_delete=models.CASCADE, )
     order = models.PositiveSmallIntegerField()
@@ -70,7 +73,7 @@ class Attachment(models.Model):
     description = models.TextField(null=True, blank=True)
 
     def __str__(self):
-        return f'{self.article.name}, №: {self.order}'
+        return f'{self.article.title}, №: {self.order}'
 
     class Meta:
         db_table = 'attachment'
@@ -118,9 +121,9 @@ class Employee(models.Model):
     position = models.CharField(max_length=32, choices=POSITIONS)
 
     def __str__(self):
-        return f'{self.full_name} position: {self.theme}'
+        return f'{self.full_name} position: {self.position}'
 
     class Meta:
-        db_table = 'position'
-        verbose_name = 'Position'
-        verbose_name_plural = 'Positions'
+        db_table = 'employee'
+        verbose_name = 'Employee'
+        verbose_name_plural = 'Employees'

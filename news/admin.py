@@ -4,25 +4,25 @@ from .models import (Category,Region,Article,Attachment,Message,Employee)
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('name','slug','description')
 
 @admin.register(Region)
 class RegionAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('name', 'slug', 'description')
 
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('title','category','published_at','review','slug')
+    search_fields = ['title']
 
 @admin.register(Attachment)
-class CategoryAdmin(admin.ModelAdmin):
-    pass
-
+class AttachmentAdmin(admin.ModelAdmin):
+    list_display = ('article','order','image')
+    autocomplete_fields = ['article']
 @admin.register(Message)
 class MessageAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('full_name','email','phone_number','theme','created_at')
 
 @admin.register(Employee)
 class EmployeeAdmin(admin.ModelAdmin):
-    pass
-
+    list_display = ('full_name','position')
