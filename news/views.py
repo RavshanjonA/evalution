@@ -11,4 +11,11 @@ def home(request):
         'categories': categories,
         'regions': regions,
     }
-    return render(request, 'news/base.html', context=data)
+    return render(request, 'news/home.html', context=data)
+def category_item(request,slug):
+    category = Category.objects.get(slug=slug)
+    return HttpResponse(f'<h3> This slug is {slug} belong to {category.name}</h3>')
+
+def region_item(request,slug):
+    region = Region.objects.get(slug=slug)
+    return HttpResponse(f'<h3>This slug is {slug} belong to {region.name}</h3>')

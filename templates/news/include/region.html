@@ -1,0 +1,17 @@
+{% load static %}
+<div class="row">
+<div class="col-md-1 span-region" >
+                <span><strong>Hududlar</strong></span>
+            </div>
+            <div class="col-md-11"  >
+                  <nav class="navbar navbar-expand-sm bg-white navbar-white">
+                      <ul class="navbar-nav">
+                        {% for region in regions %}
+                        <li class="nav-item active ">
+                            <a class="nav-link  text-dark small-text" href="{% url 'news:region-item' slug=region.slug  %}">{{region.name}}</a>
+                        </li>
+                        {% endfor %}
+                      </ul>
+                  </nav>
+            </div>
+</div>>

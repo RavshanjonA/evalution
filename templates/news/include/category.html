@@ -1,0 +1,17 @@
+{% load static %}
+<div class="row">
+<div class="col-md-12">
+    <nav class="navbar navbar-expand-sm bg-white navbar-white " >
+                    <a class="navbar-brand " href="#">
+                        <img src="{% static 'assets/img/kun_uz-logo.jpg' %}" alt="Logo" style="width:100px;">
+                    </a>
+                    <ul class="navbar-nav">
+                        {% for category in categories %}
+                        <li class="nav-item active">
+                            <a class="nav-link text-uppercase text-dark " href="{% url 'news:category-item' slug=category.slug  %}"><strong>{{category.name}}</strong></a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </nav>
+    </div>
+</div>
