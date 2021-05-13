@@ -1,0 +1,14 @@
+.small-text{
+    font-size: small;
+
+}
+.small-text::before{
+    content: '| ';
+
+    text-align: left;
+    display: inline-block;
+    width: 12px;
+}
+.span-region{
+    padding-top: 13px;
+}

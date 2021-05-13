@@ -14,6 +14,7 @@ class BaseModel(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=64, unique=True)
+    logo = models.ImageField(null=True, blank=True)
     slug = models.SlugField(unique=True)
     description = models.TextField(null=True, blank=True)
 
