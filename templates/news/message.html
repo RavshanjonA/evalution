@@ -1,0 +1,22 @@
+{% extends 'news/include/base.html' %}
+{% load static %}
+
+{% block title %} Aloqa {% endblock %}
+{% block header %}
+
+            {% include 'news\include\category.html' %}
+
+{% endblock %}
+
+{% block container-fluid %}
+<div class="row">
+    <div class="col-md-6">
+        <form method="POST">
+            {{form.as_p}}
+
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}
