@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
+from news.forms import MessageForm
 from news.models import Category, Region
 
 
@@ -19,3 +20,10 @@ def category_item(request,slug):
 def region_item(request,slug):
     region = Region.objects.get(slug=slug)
     return HttpResponse(f'<h3>This slug is {slug} belong to {region.name}</h3>')
+
+def contactform(request):
+    form = MessageForm()
+    if request.method == 'post':
+        if form.is_valid:
+            print("Success")
+    return render(request,'news/message.html',context={'form':form})
