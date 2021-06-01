@@ -1,0 +1,16 @@
+{% extends 'news/include/base.html' %}
+{% load static %}
+<header>
+    {% block header %}
+            {% include 'news\include\category.html' %}
+    {% endblock %}
+</header>
+{% block container-fluid %}
+    <h3>Our Team</h3>
+{% endblock %}
+
+<footer>
+    {% block footer %}
+        {% include 'news\include\footer.html' %}
+    {% endblock %}
+</footer>

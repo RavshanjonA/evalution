@@ -3,17 +3,16 @@
 
 {% block title %} Aloqa {% endblock %}
 {% block header %}
-
             {% include 'news\include\category.html' %}
-
 {% endblock %}
 
 {% block container-fluid %}
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-12">
         <form method="POST">
+            {% csrf_token %}
             {{form.as_p}}
-
+            <input type="submit">
         </form>
 
     </div>
