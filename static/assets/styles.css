@@ -1,6 +1,8 @@
 .small-text{
     font-size: small;
-
+}
+.back_ground{
+    background-color: #4ac1f7;
 }
 .small-text::before{
     content: '| ';
@@ -11,4 +13,7 @@
 }
 .span-region{
     padding-top: 13px;
+}
+.footer-lis-item{
+    margin-left:  15px;
 }
