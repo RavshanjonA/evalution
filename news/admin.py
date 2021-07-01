@@ -11,12 +11,14 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(Region)
 class RegionAdmin(admin.ModelAdmin):
     list_display = ('name', 'slug', 'description')
+    search_fields = ('name',)
 
 
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
     list_display = ('title', 'category', 'published_at', 'review', 'slug')
     search_fields = ['title']
+    prepopulated_fields = {'slug': ('title',)}
 
 
 @admin.register(Attachment)
@@ -27,7 +29,9 @@ class AttachmentAdmin(admin.ModelAdmin):
 
 @admin.register(Message)
 class MessageAdmin(admin.ModelAdmin):
-    list_display = ('full_name', 'email', 'phone_number', 'theme', 'created_at')
+    list_display = ('id', 'full_name', 'email', 'phone_number', 'theme', 'created_at')
+    list_display_links = ('id', 'created_at',)
+
 
 
 @admin.register(Employee)
