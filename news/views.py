@@ -1,38 +1,43 @@
 from django.http import HttpResponse
-from django.shortcuts import render
-from django.views.generic import ListView
+from django.shortcuts import render, redirect
 
 from news.forms import MessageForm
-from news.models import Category, Region, Employee
+from news.models import Category, Region, Employee, Article
 
 
 def home(request):
-    categories = Category.objects.all().order_by('pk')
-    regions = Region.objects.all().order_by('pk')
+    article = Article.objects.all().order_by('-published_at')
     data = {
-        'categories': categories,
-        'regions': regions,
+        'posts': article,
     }
+
     return render(request, 'news/home.html', context=data)
 
 
 def category_item(request, slug):
-    category = Category.objects.get(slug=slug)
-    return HttpResponse(f'<h3> This slug is {slug} belong to {category.name}</h3>')
+    article = Article.objects.filter(category__slug=slug).order_by('-published_at')
+    data = {
+        'posts': article,
+    }
+    return render(request, 'news/category.html', context=data)
 
 
 def region_item(request, slug):
-    region = Region.objects.get(slug=slug)
-    return HttpResponse(f'<h3>This slug is {slug} belong to {region.name}</h3>')
+    article = Article.objects.filter(region__slug=slug).order_by('-published_at')
+    data = {
+        'posts': article,
+    }
+    return render(request, 'news/region.html', context=data)
 
 
 def contactform(request):
     form = MessageForm()
     if request.method == 'POST':
+        form = MessageForm(request.POST)
         if form.is_valid():
             form.save()
             print("Success")
-            return redirect('')
+            return redirect('news:home')
     categories = Category.objects.all().order_by('pk')
     data = {
         'categories': categories,
@@ -41,8 +46,17 @@ def contactform(request):
     return render(request, 'news/message.html', data)
 
 
-class TeamView(ListView):
-    model = Employee
+def detail_view(request, slug):
+    ariticle = Article.objects.get(slug=slug)
+    data = {'post':ariticle}
+    return render(request, 'news/detail.html',data )
 
-    context_object_name = 'employees'
-    template_name = 'news/team.html'
+
+def team_view(request):
+    employees = Employee.objects.all()
+
+    data = {
+        'employees': employees,
+    }
+
+    return render(request, 'news/team.html', context=data)
