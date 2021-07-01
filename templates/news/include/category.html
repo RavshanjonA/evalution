@@ -8,7 +8,8 @@
                     <ul class="navbar-nav">
                         {% for category in categories %}
                         <li class="nav-item active">
-                            <a class="nav-link text-uppercase text-dark " href="{% url 'news:category-item' slug=category.slug  %}"><strong>{{category.name}}</strong></a>
+                            <a class="nav-link text-uppercase text-dark "
+                               href="{% url 'news:category-item' slug=category.slug  %}"><strong>{{category.name}}</strong></a>
                         </li>
                         {% endfor %}
                     </ul>

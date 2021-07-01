@@ -6,7 +6,6 @@
 }
 .small-text::before{
     content: '| ';
-
     text-align: left;
     display: inline-block;
     width: 12px;
@@ -14,6 +13,14 @@
 .span-region{
     padding-top: 13px;
 }
-.footer-lis-item{
-    margin-left:  15px;
+.team-item{
+    border: 1px solid red;
 }
+.team-picture{
+    height: 200px;
+}
+.team-item-position{
+    text-align: center;
+}
+
+

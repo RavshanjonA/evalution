@@ -1,12 +1,31 @@
 {% extends 'news/include/base.html' %}
 {% load static %}
+{%block title%}Kun.uz jamoasi | KUN.UZ{% endblock %}
 <header>
     {% block header %}
             {% include 'news\include\category.html' %}
     {% endblock %}
 </header>
 {% block container-fluid %}
-    <h3>Our Team</h3>
+
+    <div class="our-team mt-20">
+        <p class="text-center font-18 font-700"> <strong>Kun.uz jamoasi</strong></p>
+    </div>
+    <div class="row">
+         {% for employee in employees %}
+            <div class="col-md-2   ">
+                <div class="team-item">
+                    <img src="{{ employee.image.url }}" class="img-fluid img-thumbnail team-picture">
+                    <h5>{{employee.full_name}}</h5>
+                    <span class="team-item-position "><p class="text-center">{{employee.position}}</p></span>
+
+
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+
 {% endblock %}
 
 <footer>
