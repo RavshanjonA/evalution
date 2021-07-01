@@ -47,15 +47,15 @@ def photo_upload_path(instance, filename):
 
 
 class Article(models.Model):
-    is_active = models.BooleanField(default=False)
     title = models.CharField(max_length=512, unique=True)
+    slug = models.SlugField(unique=True, max_length=256)
+    is_active = models.BooleanField(default=False)
     anons = models.TextField()
     text = models.TextField()
     category = models.ForeignKey(to=Category, on_delete=models.CASCADE)
     region = models.ManyToManyField(to=Region, related_name='article', blank=True, null=True)
     published_at = models.DateTimeField(null=True, blank=True)
     review = models.PositiveIntegerField(default=0)
-    slug = models.SlugField(unique=True, max_length=256)
     image = models.ImageField(upload_to=photo_upload_path)
 
     def __str__(self):
@@ -103,10 +103,9 @@ def upload_employee_path(instance, filename):
     current_dt = timezone.now()
     return f"uploads/{current_dt.strftime('%Y_%m')}/{uuid.uuid4().hex}/{filename}"
 
-
 class Employee(models.Model):
     POSITIONS = (
-        ('muxbir', 'Muxbir'),
+        ('advanture', 'Adventure'),
         ('maxsus muxbir', 'Maxsus muxbir'),
         ('hududiy muxbir', 'Hududiy muxbir'),
         ('muharrir', 'Muharrir'),
